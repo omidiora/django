@@ -1,8 +1,10 @@
 from django.urls import path
-from .views import News,home,contact
+from .views import Newp,home,contact,NewsDate,register
 
 urlpatterns = [
-    path('news',News, name="News"),
-    path('home', home,name="home"),
-    path('contact',contact, name="contact"),
+    path('news',Newp, name="news"),
+    path('', home,name="home"),
+    path('contact/',contact, name="contact"),
+    path('newsdate/<int:year>',NewsDate, name="newsdate"),
+    path('signup/',register, name="register"),
 ]
