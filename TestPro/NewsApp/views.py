@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
+from .models import News
+from .forms import RegistrationForm,RegistrationModal
 from .models import News,RegistraionData
-from .forms import RegistrationForm
+from django.contrib import messages
 
 
 
@@ -51,5 +53,19 @@ def addUser(request):
                                email=form.cleaned_data['email'],
                                phone=form.cleaned_data['phone'])
                   myregister.save()
+                  messages.add_message(request,messages.SUCCESS,'You have signup successffully  ')
                   return redirect('home')
+
+def modelform(request):
+    context={
+    
+    "modalform":RegistrationModal
+    
+    }
+    return render(request,'modalform.html',context )
          
+def addModalForm(request):
+    mymodalform=RegistrationModal(request.POST)
+    if mymodalform.is_valid():
+        mymodalform.save()
+    return redirect('form')
